@@ -129,3 +129,21 @@ alias xratividade="fRegistrarAtividade ./Atividades.md "
 alias xcatividade="fConcluirAtividade ./Atividades.md "
 
 
+# GIT
+function fGitps () {
+	_branch=`git rev-parse --abbrev-ref HEAD`
+	git push origin $_branch
+}
+
+function fGitpl () {
+	_branch=`git rev-parse --abbrev-ref HEAD`
+	git pull origin $_branch
+}
+
+alias xgitps="fGitps "
+alias xgitpl="fGitpl "
+alias xgits="git status -s"
+alias xgitd="git diff --name-only"
+alias xgitr="git restore --staged "
+alias xgitb="git rev-parse --abbrev-ref HEAD"
+
