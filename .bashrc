@@ -147,3 +147,10 @@ alias xgitd="git diff --name-only"
 alias xgitr="git restore --staged "
 alias xgitb="git rev-parse --abbrev-ref HEAD"
 
+# MVN
+alias mvno="mvn clean install -DskipTests=true --offline -T 4 "
+
+# OUTROS
+if [[ -f ~/.bashrc2 ]]; then 
+    source ~/.bashrc2
+fi
