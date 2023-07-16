@@ -6,7 +6,7 @@ alias xatualizar="source ~/.bashrc"
 
 # esta função será utilizada pelas outras funções de atividade
 function fCriarArquivoAtividades() {
-    _arquivo='Atividade.md'
+    _arquivo='Atividades.md'
     
     if [[ $# -ge 1 ]]; then
         _arquivo=${1}
@@ -20,7 +20,7 @@ function fCriarArquivoAtividades() {
 
 # inicia uma atividade, deve ser informado o arquivo onde iniciar veja alias xiatividade
 function fIniciarAtividade() {
-    _arquivo='Atividade.md'
+    _arquivo='Atividades.md'
 
      if [[ $# -ge 1 ]]; then
         _arquivo=${1}
@@ -42,7 +42,7 @@ function fIniciarAtividade() {
 function fRegistrarAtividade() {
     _argumentos=$#
     _atividade=''
-    _arquivo='Atividade.md'
+    _arquivo='Atividades.md'
 
     if [[ $_argumentos -ge 2 ]]; then 
         _atividade=`echo -n "${2}" | tr '|;' ','`
@@ -58,7 +58,7 @@ function fRegistrarAtividade() {
 }
 
 function fConcluirAtividade() {
-    _arquivo='Atividade.md'
+    _arquivo='Atividades.md'
     _atividades=''
     _data=''
     _contador=0
@@ -121,10 +121,16 @@ function fConcluirAtividade() {
 
 function fSomarAtividade() {
     _data=`date '+ %d/%m/%Y'`
-    if [[ $# -ge 1 ]]; then
+    _arquivo='Atividades.md'
+
+    if [[ $# -ge 2 ]]; then
+        _arquivo=${1}
+        _data=${2}
+    elfi [[ $# -ge 1 ]]; then 
         _data=${1}
     fi
-    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' Atividades.md | egrep ${_data} | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
+
+    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' ${_arquivo} | egrep ${_data} | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
     _hora=$(($_minutos/60))
     _miuto=$(($_minutos % 60));
     echo $h'h'$m'm'
@@ -141,7 +147,7 @@ alias xcatividade="fConcluirAtividade ./Atividades.md "
 
 # exemplo para somar o tempo em um dia de atividade xsatividade [DATA(dd/mm/aaaa)] 
 # caso não informe a data será usado a data atual 
-alias xshatividade="data=`date '+ %d-%m-%Y'`;fSomarAtividade ${data}"
+alias xshatividade="data=`date '+ %d-%m-%Y'`;fSomarAtividade ./Atividades.md ${data}"
 
 
 # GIT
