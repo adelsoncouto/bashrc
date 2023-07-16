@@ -97,7 +97,7 @@ function fConcluirAtividade() {
         sed -i "1,${_contador}d" ${_arquivo}
   
         _dataFim=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-        _dataRegitro=`date '+ %d/%m/%Y'`
+        _dataRegitro=`date '+ %Y-%m-%d'`
         _segundosInicio=$(date --date="$_data" +%s)
         _segundosfim=$(date --date="$_dataFim" +%s)
         _totalMinutos=$(( ($_segundosfim - $_segundosInicio) / 60 ))
@@ -120,7 +120,7 @@ function fConcluirAtividade() {
 }
 
 function fSomarAtividade() {
-    _data=`date '+ %d/%m/%Y'`
+    _data=`date '+ %Y-%m-%d'`
     _arquivo='Atividades.md'
 
     if [[ $# -ge 2 ]]; then
@@ -130,7 +130,7 @@ function fSomarAtividade() {
         _data=${1}
     fi
 
-    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' ${_arquivo} | egrep ${_data} | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
+    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' ${_arquivo} | egrep "${_data}" | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
     _hora=$(($_minutos/60))
     _miuto=$(($_minutos % 60));
     echo $h'h'$m'm'
@@ -145,9 +145,12 @@ alias xratividade="fRegistrarAtividade ./Atividades.md "
 # exemplo para concluir uma atividade xcatividade 'Finalizada'|'Em andamento'
 alias xcatividade="fConcluirAtividade ./Atividades.md "
 
-# exemplo para somar o tempo em um dia de atividade xsatividade [DATA(dd/mm/aaaa)] 
+# exemplo para somar o tempo de hoje das atividades xshatividade 
+alias xshatividade="data=`date '+ %Y-%m-%d'`;fSomarAtividade ./Atividades.md ${data}"
+
+# exemplo para somar o tempo em um dia de atividade xsatividade [DATA(aaaa-mm-dd)] 
 # caso não informe a data será usado a data atual 
-alias xshatividade="data=`date '+ %d-%m-%Y'`;fSomarAtividade ./Atividades.md ${data}"
+alias xsatividade="fSomarAtividade ./Atividades.md "
 
 
 # GIT
