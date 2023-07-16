@@ -130,10 +130,10 @@ function fSomarAtividade() {
         _data=${1}
     fi
 
-    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' ${_arquivo} | egrep "${_data}" | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
-    _hora=$(($_minutos/60))
-    _miuto=$(($_minutos % 60));
-    echo $h'h'$m'm'
+    _minutos=`awk -F '|' '/\|/ {print $2 $3}' ${_arquivo} | egrep "${_data}" | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
+    _hora=$(($_minutos / 60))
+    _minuto=$(($_minutos % 60));
+    echo $_hora'h'$_minuto'm'
 }
 
 # exemplo para dar inicio a uma atividade xiatividade
