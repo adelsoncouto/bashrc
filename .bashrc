@@ -146,7 +146,7 @@ alias xratividade="fRegistrarAtividade ./Atividades.md "
 alias xcatividade="fConcluirAtividade ./Atividades.md "
 
 # exemplo para somar o tempo de hoje das atividades xshatividade 
-alias xshatividade="data=`date '+ %Y-%m-%d'`;fSomarAtividade ./Atividades.md ${data}"
+alias xshatividade="fSomarAtividade ./Atividades.md $(date '+ %Y-%m-%d')"
 
 # exemplo para somar o tempo em um dia de atividade xsatividade [DATA(aaaa-mm-dd)] 
 # caso não informe a data será usado a data atual 
