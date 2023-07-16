@@ -126,7 +126,7 @@ function fSomarAtividade() {
     if [[ $# -ge 2 ]]; then
         _arquivo=${1}
         _data=${2}
-    elfi [[ $# -ge 1 ]]; then 
+    elif [[ $# -ge 1 ]]; then 
         _data=${1}
     fi
 
