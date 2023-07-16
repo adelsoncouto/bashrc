@@ -102,8 +102,8 @@ function fConcluirAtividade() {
         _segundosfim=$(date --date="$_dataFim" +%s)
         _totalMinutos=$(( ($_segundosfim - $_segundosInicio) / 60 ))
     
-        if [[ $_totalMinutos -lt 10 ]]; then 
-            _totalMinutos=10
+        if [[ $_totalMinutos -lt 1 ]]; then 
+            _totalMinutos=1
         fi
         
         _tempo="${_totalMinutos}m"
@@ -119,6 +119,17 @@ function fConcluirAtividade() {
 
 }
 
+function fSomarAtividade() {
+    _data=`date '+ %d/%m/%Y'`
+    if [[ $# -ge 1 ]]; then
+        _data=${1}
+    fi
+    _mintuos=`awk -F '|' '/\|/ {print $2 $3}' Atividades.md | egrep ${_data} | awk '{gsub(/m/, "", $2); total += $2} END {print total}'`
+    _hora=$(($_minutos/60))
+    _miuto=$(($_minutos % 60));
+    echo $h'h'$m'm'
+}
+
 # exemplo para dar inicio a uma atividade xiatividade
 alias xiatividade="fIniciarAtividade ./Atividades.md "
 
@@ -127,6 +138,10 @@ alias xratividade="fRegistrarAtividade ./Atividades.md "
 
 # exemplo para concluir uma atividade xcatividade 'Finalizada'|'Em andamento'
 alias xcatividade="fConcluirAtividade ./Atividades.md "
+
+# exemplo para somar o tempo em um dia de atividade xsatividade [DATA(dd/mm/aaaa)] 
+# caso não informe a data será usado a data atual 
+alias xshatividade="data=`date '+ %d-%m-%Y'`;fSomarAtividade ${data}"
 
 
 # GIT
