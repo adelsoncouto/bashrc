@@ -88,7 +88,7 @@ function fConcluirAtividade() {
             continue
         fi
 
-        _atividades="${linha}; ${_atividades}"
+        _atividades="${linha}; <br>${_atividades}"
 
     done < "${_arquivo}"
     
